@@ -24,11 +24,11 @@ namespace SkillazTestTask
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
 
-			app.UseCors( builder =>
-				 builder.AllowAnyOrigin()
-					 .AllowAnyMethod()
-					 .AllowAnyHeader()
-					 .AllowCredentials()
+			app.UseCors( builder => builder
+				.AllowAnyOrigin()
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+				.AllowCredentials()
 			);
 
 			app.Use( del => new ErrorHandlingMiddleware( del ).Invoke );
