@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using SkillazTestTask.CustomMiddleware;
 using System;
 
 namespace SkillazTestTask
@@ -20,11 +21,6 @@ namespace SkillazTestTask
 
 		public void Configure( IApplicationBuilder app, IHostingEnvironment env )
 		{
-			if ( env.IsDevelopment() )
-			{
-				app.UseDeveloperExceptionPage();
-			}
-
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
 
@@ -34,6 +30,9 @@ namespace SkillazTestTask
 					 .AllowAnyHeader()
 					 .AllowCredentials()
 			);
+
+			app.Use( del => new ErrorHandlingMiddleware( del ).Invoke );
+
 			app.UseMvcWithDefaultRoute();
 		}
 	}
