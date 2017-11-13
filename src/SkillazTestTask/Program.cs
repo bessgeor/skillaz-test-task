@@ -8,9 +8,9 @@ namespace SkillazTestTask
 	{
 		public static void Main( string[] args )
 		{
-			var config = new ConfigurationBuilder().AddCommandLine( args ).Build();
+			IConfigurationRoot config = new ConfigurationBuilder().AddCommandLine( args ).Build();
 
-			var host = new WebHostBuilder()
+			IWebHost host = new WebHostBuilder()
 				.UseKestrel()
 				.UseContentRoot( Directory.GetCurrentDirectory() )
 				.UseConfiguration( config )
